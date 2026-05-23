@@ -1,0 +1,809 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { JakartaWordmark, PlusJIcon } from "../src/components/Logo";
+import "../src/tokens.css";
+
+<Meta title="Jakarta Design System" />
+
+export const font = "'Plus Jakarta Sans', sans-serif";
+
+export const districtColors = {
+  kepulauanSeribu: "#00aaff",
+  utara: "#1c5ddc",
+  barat: "#feb52b",
+  pusat: "#fc351c",
+  timur: "#eb30a2",
+  selatan: "#19ae5d",
+  stem: "#1a1a1a",
+};
+
+export const districts = [
+  { name: "Kepulauan Seribu", en: "Thousand Islands", color: "#00aaff" },
+  { name: "Utara", en: "North", color: "#1c5ddc" },
+  { name: "Barat", en: "West", color: "#feb52b" },
+  { name: "Pusat", en: "Centre", color: "#fc351c" },
+  { name: "Timur", en: "East", color: "#eb30a2" },
+  { name: "Selatan", en: "South", color: "#19ae5d" },
+];
+
+<div className="sb-unstyled" style={{ fontFamily: font, margin: 0, padding: 0 }}>
+
+{/* ── Hero ─────────────────────────────────────────────────────────────── */}
+
+<div
+  style={{
+    background: "#fc351c",
+    padding: "80px 64px 96px",
+    display: "flex",
+    flexDirection: "column",
+    gap: 40,
+  }}
+>
+  <div>
+    <JakartaWordmark
+      height={100}
+      color="#ffffff"
+      districtColors={{
+        kepulauanSeribu: "#ffffff",
+        utara: "#ffffff",
+        barat: "#ffffff",
+        pusat: "#ffffff",
+        timur: "#ffffff",
+        selatan: "#ffffff",
+        stem: "#ffffff",
+      }}
+    />
+  </div>
+  <div style={{ maxWidth: 640 }}>
+    <p
+      style={{
+        color: "rgba(255,255,255,0.6)",
+        fontSize: "0.75rem",
+        fontWeight: 700,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        margin: "0 0 12px",
+      }}
+    >
+      Kota Kolaborasi · City of Collaboration
+    </p>
+    <p
+      style={{
+        color: "#ffffff",
+        fontSize: "1.375rem",
+        fontWeight: 400,
+        lineHeight: 1.5,
+        margin: 0,
+      }}
+    >
+      Design tokens, logo assets, and typography for Jakarta's visual identity —
+      open for everyone to use, remix, and build upon.
+    </p>
+  </div>
+  <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+    <a
+      href="https://github.com/hkar19/jakarta"
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        background: "#ffffff",
+        color: "#fc351c",
+        padding: "12px 24px",
+        borderRadius: 0,
+        fontWeight: 700,
+        fontSize: "0.875rem",
+        textDecoration: "none",
+        letterSpacing: "0.02em",
+      }}
+    >
+      View on GitHub →
+    </a>
+    <code
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        background: "rgba(0,0,0,0.2)",
+        color: "#ffffff",
+        padding: "12px 24px",
+        fontSize: "0.875rem",
+        fontFamily: "ui-monospace, monospace",
+      }}
+    >
+      npm install ds-jakarta
+    </code>
+  </div>
+</div>
+
+{/* ── Manifesto ────────────────────────────────────────────────────────── */}
+
+<div style={{ background: "#19ae5d", padding: "80px 64px" }}>
+  <p
+    style={{
+      color: "rgba(255,255,255,0.5)",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      margin: "0 0 20px",
+    }}
+  >
+    Introduction · Pembukaan
+  </p>
+  <h2
+    style={{
+      color: "#ffffff",
+      fontSize: "clamp(2rem, 6vw, 4rem)",
+      fontWeight: 800,
+      lineHeight: 1.1,
+      margin: "0 0 32px",
+      maxWidth: 800,
+    }}
+  >
+    Bayangkan Jakarta
+    <br />
+    di benakmu.
+  </h2>
+  <p
+    style={{
+      color: "rgba(255,255,255,0.7)",
+      fontSize: "1rem",
+      margin: 0,
+      fontStyle: "italic",
+      letterSpacing: "0.01em",
+    }}
+  >
+    Picture Jakarta in your mind.
+  </p>
+</div>
+
+{/* ── Philosophy ───────────────────────────────────────────────────────── */}
+
+<div
+  style={{
+    background: "#ffffff",
+    padding: "80px 64px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "64px 80px",
+  }}
+>
+  <div>
+    <p
+      style={{
+        color: "#19ae5d",
+        fontSize: "0.75rem",
+        fontWeight: 700,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        margin: "0 0 20px",
+      }}
+    >
+      Bagi warganya
+    </p>
+    <p
+      style={{
+        color: "#1a1a1a",
+        fontSize: "1.125rem",
+        lineHeight: 1.7,
+        margin: "0 0 20px",
+      }}
+    >
+      Kota Jakarta membangkitkan ragam perasaan, terjebak antara cinta yang
+      mendalam dan kegusaran yang tak tersampaikan. Di kota ini juga tumbuh
+      harapan dan impian.
+    </p>
+    <p
+      style={{
+        color: "#6e6e6e",
+        fontSize: "0.9rem",
+        lineHeight: 1.7,
+        margin: 0,
+        fontStyle: "italic",
+      }}
+    >
+      There is always a love/hate relationship between Jakarta and its people.
+      There may be hope, dreams, and the comfort of home — yet also exhaustion,
+      anger and isolation.
+    </p>
+  </div>
+  <div>
+    <p
+      style={{
+        color: "#19ae5d",
+        fontSize: "0.75rem",
+        fontWeight: 700,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        margin: "0 0 20px",
+      }}
+    >
+      Karena keragaman
+    </p>
+    <p
+      style={{
+        color: "#1a1a1a",
+        fontSize: "1.125rem",
+        lineHeight: 1.7,
+        margin: "0 0 20px",
+      }}
+    >
+      Mereka yang bertolak belakang hidup berdampingan. Semua bersinggungan,
+      leburkan budaya, cipta, rasa, dan karsa. Karena keragaman yang hidup
+      berdampingan ini, di kota Jakarta apapun bisa terjadi.
+    </p>
+    <p
+      style={{
+        color: "#6e6e6e",
+        fontSize: "0.9rem",
+        lineHeight: 1.7,
+        margin: 0,
+        fontStyle: "italic",
+      }}
+    >
+      The rich and the poor, the happy and the sad — all are living side by
+      side, creating a melting pot of cultures, ideas, beliefs and beings. For
+      when Jakarta and Jakartans become one, the impossible happens.
+    </p>
+  </div>
+</div>
+
+{/* ── Collaboration call-out ────────────────────────────────────────────── */}
+
+<div
+  style={{
+    background: "#feb52b",
+    padding: "80px 64px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "64px 80px",
+    alignItems: "center",
+  }}
+>
+  <div>
+    <div
+      style={{
+        color: "#19ae5d",
+        fontSize: "0.75rem",
+        fontWeight: 700,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        margin: "0 0 20px",
+      }}
+    >
+      Kolaborasi · Collaboration
+    </div>
+    <div
+      style={{
+        color: "#1a1a1a",
+        fontSize: "2rem",
+        fontWeight: 800,
+        lineHeight: 1.2,
+        margin: "0 0 16px",
+      }}
+    >
+      Bekerja sama,
+      <br />
+      temukan Jakarta
+      <br />
+      sebenarnya.
+    </div>
+    <div
+      style={{
+        color: "rgba(0,0,0,0.5)",
+        fontSize: "0.875rem",
+        lineHeight: 1.7,
+        margin: "0 0 24px",
+        fontStyle: "italic",
+      }}
+    >
+      Work together to experience Jakarta as your own.
+    </div>
+    <div
+      style={{
+        color: "rgba(0,0,0,0.75)",
+        fontSize: "1rem",
+        lineHeight: 1.8,
+      }}
+    >
+      Ini Jakarta yang kita inginkan, yang memicu kolaborasi tidak hanya antar
+      manusia yang tinggal di dalamnya, tapi antara manusia dengan kotanya.
+    </div>
+  </div>
+  <div style={{ display: "flex", justifyContent: "center" }}>
+    <PlusJIcon size={300} />
+  </div>
+</div>
+
+{/* ── The +J symbol ────────────────────────────────────────────────────── */}
+
+<div style={{ background: "#f7f7f7", padding: "80px 64px" }}>
+  <p
+    style={{
+      color: "#fc351c",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      margin: "0 0 8px",
+    }}
+  >
+    1.2 — Variasi Logo / Simbol +
+  </p>
+  <div
+    style={{
+      color: "#1a1a1a",
+      fontSize: "1.75rem",
+      fontWeight: 800,
+      margin: "0 0 48px",
+    }}
+  >
+    Logo Sebagai Katalis &amp; Ajakan Kolaborasi
+  </div>
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "180px 1fr",
+      gap: 64,
+      alignItems: "start",
+    }}
+  >
+    <PlusJIcon size={160} districtColors={districtColors} />
+    <div
+      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 48px" }}
+    >
+      {districts.map((d) => (
+        <div
+          key={d.name}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "12px 0",
+            borderBottom: "1px solid #ebebeb",
+          }}
+        >
+          <div
+            style={{
+              width: 16,
+              height: 16,
+              flexShrink: 0,
+              background: d.color,
+              borderRadius: d.name === "Kepulauan Seribu" ? "0 0 0 100%" : 2,
+            }}
+          />
+          <div>
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: "0.875rem",
+                color: "#1a1a1a",
+              }}
+            >
+              {d.name}
+            </div>
+            <div style={{ fontSize: "0.75rem", color: "#6e6e6e" }}>{d.en}</div>
+          </div>
+        </div>
+      ))}
+      <div style={{ gridColumn: "1 / -1", paddingTop: 24 }}>
+        <p
+          style={{
+            color: "#6e6e6e",
+            fontSize: "0.875rem",
+            lineHeight: 1.7,
+            margin: 0,
+          }}
+        >
+          5 persegi membentuk simbol <strong>+</strong> mewakili 5 Kota
+          Administrasi di Jakarta: Pusat, Utara, Selatan, Barat dan Timur.
+          Segitiga di pojok kiri atas adalah penanda Kabupaten Administrasi
+          Kepulauan Seribu.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{/* ── Design tokens ────────────────────────────────────────────────────── */}
+
+<div style={{ background: "#ffffff", padding: "80px 64px" }}>
+  <p
+    style={{
+      color: "#1c5ddc",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      margin: "0 0 8px",
+    }}
+  >
+    3 — Warna / Colour Tokens
+  </p>
+  <div
+    style={{
+      color: "#1a1a1a",
+      fontSize: "1.75rem",
+      fontWeight: 800,
+      margin: "0 0 12px",
+    }}
+  >
+    Palet MENOR
+  </div>
+  <p style={{ color: "#6e6e6e", fontSize: "0.9rem", margin: "0 0 40px" }}>
+    Named after the six administrative districts of Jakarta.
+  </p>
+  <div
+    style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 16 }}
+  >
+    {[
+      {
+        name: "Biru Pesisir",
+        var: "--jkt-color-menor-biru-pesisir",
+        hex: "#00aaff",
+        district: "Kepulauan Seribu",
+      },
+      {
+        name: "Biru Abang",
+        var: "--jkt-color-menor-biru-abang",
+        hex: "#1c5ddc",
+        district: "Utara",
+      },
+      {
+        name: "Kuning Gigi Balang",
+        var: "--jkt-color-menor-kuning-gigi-balang",
+        hex: "#feb52b",
+        district: "Barat",
+      },
+      {
+        name: "Jingga Bis Kota",
+        var: "--jkt-color-menor-jingga-bis-kota",
+        hex: "#fc351c",
+        district: "Pusat",
+      },
+      {
+        name: "Pink None",
+        var: "--jkt-color-menor-pink-none",
+        hex: "#eb30a2",
+        district: "Timur",
+      },
+      {
+        name: "Hijau Betawi",
+        var: "--jkt-color-menor-hijau-betawi",
+        hex: "#19ae5d",
+        district: "Selatan",
+      },
+    ].map((c) => (
+      <div key={c.name}>
+        <div style={{ background: c.hex, height: 80, borderRadius: 0 }} />
+        <div style={{ paddingTop: 10 }}>
+          <div
+            style={{ fontWeight: 700, fontSize: "0.8rem", color: "#1a1a1a" }}
+          >
+            {c.name}
+          </div>
+          <div style={{ fontSize: "0.7rem", color: "#6e6e6e", marginTop: 2 }}>
+            {c.district}
+          </div>
+          <div
+            style={{
+              fontFamily: "monospace",
+              fontSize: "0.7rem",
+              color: "#4d4d4d",
+              marginTop: 4,
+            }}
+          >
+            {c.hex}
+          </div>
+          <div
+            style={{
+              fontFamily: "monospace",
+              fontSize: "0.65rem",
+              color: "#b3b3b3",
+              marginTop: 2,
+              wordBreak: "break-all",
+            }}
+          >
+            {c.var}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* ── Typography ───────────────────────────────────────────────────────── */}
+
+<div style={{ background: "#f7f7f7", padding: "80px 64px" }}>
+  <p
+    style={{
+      color: "#1c5ddc",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      margin: "0 0 8px",
+    }}
+  >
+    2 — Tipografi
+  </p>
+  <div
+    style={{
+      color: "#1a1a1a",
+      fontSize: "1.75rem",
+      fontWeight: 800,
+      margin: "0 0 48px",
+    }}
+  >
+    Plus Jakarta Sans
+  </div>
+  <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+    {[
+      {
+        role: "Judul Utama",
+        size: "3rem",
+        weight: 800,
+        sample: "Kota Kolaborasi",
+      },
+      {
+        role: "Judul Pendukung",
+        size: "2rem",
+        weight: 600,
+        sample: "Jakarta, Ibu Kota Bangsa",
+      },
+      {
+        role: "Sub Judul",
+        size: "1.375rem",
+        weight: 500,
+        sample: "Saat Jakarta Memanggil, Kita Menjawab",
+      },
+      {
+        role: "Paragraf",
+        size: "1rem",
+        weight: 400,
+        sample:
+          "+Jakarta merupakan sebuah semangat yang berusaha mewujudkan harapan ini.",
+      },
+      {
+        role: "Tajuk",
+        size: "0.75rem",
+        weight: 700,
+        sample: "KOLABORASI POSITIF · CITY OF COLLABORATION",
+      },
+    ].map((t, i) => (
+      <div
+        key={t.role}
+        style={{
+          padding: "24px 0",
+          borderBottom: "1px solid #ebebeb",
+          display: "flex",
+          alignItems: "baseline",
+          gap: 32,
+        }}
+      >
+        <div style={{ width: 120, flexShrink: 0 }}>
+          <div
+            style={{
+              fontSize: "0.7rem",
+              fontWeight: 700,
+              color: "#b3b3b3",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+            }}
+          >
+            {t.role}
+          </div>
+          <div
+            style={{
+              fontFamily: "monospace",
+              fontSize: "0.65rem",
+              color: "#b3b3b3",
+              marginTop: 2,
+            }}
+          >
+            {t.size} / {t.weight}
+          </div>
+        </div>
+        <div
+          style={{
+            fontFamily: font,
+            fontSize: t.size,
+            fontWeight: t.weight,
+            lineHeight: 1.2,
+            color: "#1a1a1a",
+          }}
+        >
+          {t.sample}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* ── Getting started ──────────────────────────────────────────────────── */}
+
+<div style={{ background: "#1c5ddc", padding: "80px 64px" }}>
+  <p
+    style={{
+      color: "rgba(255,255,255,0.5)",
+      fontSize: "0.75rem",
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      margin: "0 0 12px",
+    }}
+  >
+    Saat Jakarta Memanggil, Kita Menjawab —
+  </p>
+  <div
+    style={{
+      color: "#ffffff",
+      fontSize: "2.5rem",
+      fontWeight: 800,
+      lineHeight: 1.15,
+      margin: "0 0 48px",
+      maxWidth: 560,
+    }}
+  >
+    This is Jakarta Design System. Use it. Play with it.
+  </div>
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 32,
+      marginBottom: 48,
+    }}
+  >
+    <div>
+      <div
+        style={{
+          color: "rgba(255,255,255,0.5)",
+          fontSize: "0.7rem",
+          fontWeight: 700,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          marginBottom: 12,
+        }}
+      >
+        Install
+      </div>
+      <div
+        style={{
+          background: "rgba(0,0,0,0.25)",
+          padding: "20px 24px",
+          fontFamily: "monospace",
+          fontSize: "0.875rem",
+          color: "#ffffff",
+          lineHeight: 1.7,
+        }}
+      >
+        <div style={{ color: "#19ae5d" }}>npm install ds-jakarta</div>
+        <div style={{ color: "#19ae5d" }}>yarn add ds-jakarta</div>
+        <div style={{ color: "#19ae5d" }}>pnpm add ds-jakarta</div>
+      </div>
+    </div>
+    <div>
+      <div
+        style={{
+          color: "rgba(255,255,255,0.5)",
+          fontSize: "0.7rem",
+          fontWeight: 700,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          marginBottom: 12,
+        }}
+      >
+        Usage
+      </div>
+      <div
+        style={{
+          background: "rgba(0,0,0,0.25)",
+          padding: "20px 24px",
+          fontFamily: "monospace",
+          fontSize: "0.8rem",
+          color: "#ffffff",
+          lineHeight: 1.7,
+        }}
+      >
+        <div>
+          <span style={{ color: "#feb52b" }}>import</span>{" "}
+          <span style={{ color: "#00aaff" }}>
+            'ds-jakarta/tokens.css'
+          </span>
+        </div>
+        <div style={{ marginTop: 8 }}>
+          <span style={{ color: "#feb52b" }}>import</span>{" "}
+          {"{ JakartaWordmark, PlusJIcon }"}
+        </div>
+        <div>
+          <span style={{ color: "#b3b3b3" }}> from</span>{" "}
+          <span style={{ color: "#00aaff" }}>'ds-jakarta'</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+    <a
+      href="https://github.com/hkar19/jakarta"
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        background: "#ffffff",
+        color: "#1c5ddc",
+        padding: "14px 28px",
+        fontWeight: 700,
+        fontSize: "0.875rem",
+        textDecoration: "none",
+        letterSpacing: "0.02em",
+      }}
+    >
+      GitHub →
+    </a>
+    <a
+      href="https://www.npmjs.com/package/ds-jakarta"
+      target="_blank"
+      rel="noreferrer"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        background: "rgba(255,255,255,0.15)",
+        color: "#ffffff",
+        border: "1px solid rgba(255,255,255,0.3)",
+        padding: "14px 28px",
+        fontWeight: 700,
+        fontSize: "0.875rem",
+        textDecoration: "none",
+        letterSpacing: "0.02em",
+      }}
+    >
+      npm →
+    </a>
+  </div>
+</div>
+
+{/* ── Footer ───────────────────────────────────────────────────────────── */}
+
+<div
+  style={{
+    background: "#1a1a1a",
+    padding: "48px 64px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  }}
+>
+  <div>
+    <JakartaWordmark
+      height={100}
+      color="#ffffff"
+      districtColors={{
+        kepulauanSeribu: "#ffffff",
+        utara: "#ffffff",
+        barat: "#ffffff",
+        pusat: "#ffffff",
+        timur: "#ffffff",
+        selatan: "#ffffff",
+        stem: "#ffffff",
+      }}
+      tagline
+    />
+  </div>
+  <div style={{ textAlign: "right" }}>
+    <style>{`.jkt-footer-credits { color: #ffffff !important; font-size: 0.75rem; line-height: 1.9; } .jkt-footer-credits a { color: rgba(255,255,255,0.45) !important; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); }`}</style>
+    <div className="jkt-footer-credits">
+      Brand identity by 6616 Creative House, Jakarta
+      <br />
+      Published by Pemprov DKI Jakarta, 2020
+      <br />
+      Design system by <a href="https://github.com/hkar19">hkar19</a>
+    </div>
+  </div>
+</div>
+
+</div>

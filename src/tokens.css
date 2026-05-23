@@ -1,0 +1,96 @@
+/**
+ * Jakarta Design System — CSS Custom Properties
+ * Import via: import 'ds-jakarta/tokens.css'
+ * Token values from docs/JakartaBrandBook.pdf
+ */
+
+:root {
+  /* --- Color: MENOR brand palette --- */
+  --jkt-color-menor-hijau-betawi:      #19ae5d;  /* Jakarta Selatan  — Pantone 7481 C  */
+  --jkt-color-menor-kuning-gigi-balang:#feb52b;  /* Jakarta Barat    — Pantone 1235 C  */
+  --jkt-color-menor-jingga-bis-kota:   #fc351c;  /* Jakarta Pusat    — Pantone Warm Red */
+  --jkt-color-menor-biru-abang:        #1c5ddc;  /* Jakarta Utara    — Pantone 2728 C  */
+  --jkt-color-menor-pink-none:         #eb30a2;  /* Jakarta Timur    — Pantone Rhodamine */
+  --jkt-color-menor-biru-pesisir:      #00aaff;  /* Kepulauan Seribu — Pantone 2995 C  */
+
+  /* --- Color: District aliases --- */
+  --jkt-color-district-pusat:     var(--jkt-color-menor-jingga-bis-kota);
+  --jkt-color-district-utara:     var(--jkt-color-menor-biru-abang);
+  --jkt-color-district-barat:     var(--jkt-color-menor-kuning-gigi-balang);
+  --jkt-color-district-selatan:   var(--jkt-color-menor-hijau-betawi);
+  --jkt-color-district-timur:     var(--jkt-color-menor-pink-none);
+  --jkt-color-district-kepulauan: var(--jkt-color-menor-biru-pesisir);
+
+  /* --- Color: Brand semantic --- */
+  --jkt-color-brand-primary:   var(--jkt-color-menor-biru-abang);
+  --jkt-color-brand-secondary: var(--jkt-color-menor-hijau-betawi);
+
+  /* --- Color: Neutral scale --- */
+  --jkt-color-neutral-0:    #ffffff;
+  --jkt-color-neutral-100:  #f7f7f7;
+  --jkt-color-neutral-200:  #ebebeb;
+  --jkt-color-neutral-300:  #d6d6d6;
+  --jkt-color-neutral-400:  #b3b3b3;
+  --jkt-color-neutral-500:  #909090;
+  --jkt-color-neutral-600:  #6e6e6e;
+  --jkt-color-neutral-700:  #4d4d4d;
+  --jkt-color-neutral-800:  #333333;
+  --jkt-color-neutral-900:  #1a1a1a;
+  --jkt-color-neutral-1000: #000000;
+
+  /* --- Color: Text --- */
+  --jkt-color-text-default:  var(--jkt-color-neutral-900);
+  --jkt-color-text-subtle:   var(--jkt-color-neutral-600);
+  --jkt-color-text-disabled: var(--jkt-color-neutral-400);
+  --jkt-color-text-inverse:  var(--jkt-color-neutral-0);
+
+  /* --- Color: Background --- */
+  --jkt-color-background-default: var(--jkt-color-neutral-0);
+  --jkt-color-background-subtle:  var(--jkt-color-neutral-100);
+  --jkt-color-background-inverse: var(--jkt-color-neutral-1000);
+
+  /* --- Color: Border --- */
+  --jkt-color-border-default: var(--jkt-color-neutral-300);
+  --jkt-color-border-subtle:  var(--jkt-color-neutral-200);
+  --jkt-color-border-focused: var(--jkt-color-brand-primary);
+
+  /* --- Spacing (base 4px) --- */
+  --jkt-spacing-0:    0;
+  --jkt-spacing-25:   2px;
+  --jkt-spacing-50:   4px;
+  --jkt-spacing-75:   6px;
+  --jkt-spacing-100:  8px;
+  --jkt-spacing-150:  12px;
+  --jkt-spacing-200:  16px;
+  --jkt-spacing-300:  24px;
+  --jkt-spacing-400:  32px;
+  --jkt-spacing-500:  40px;
+  --jkt-spacing-600:  48px;
+  --jkt-spacing-800:  64px;
+  --jkt-spacing-1000: 80px;
+
+  /* --- Typography: Font Family — Plus Jakarta Sans (JakartaBrandBook.pdf) --- */
+  --jkt-font-family-display: 'Plus Jakarta Sans', sans-serif;
+  --jkt-font-family-body:    'Plus Jakarta Sans', sans-serif;
+  --jkt-font-family-code:    ui-monospace, 'Cascadia Code', monospace;
+
+  /* --- Typography: Font Size (brand scale from brand book, converted pt→px @96dpi) --- */
+  --jkt-font-size-xs:  0.75rem;   /* 12px  — Tajuk (12pt) */
+  --jkt-font-size-sm:  0.875rem;  /* 14px */
+  --jkt-font-size-md:  1rem;      /* 16px */
+  --jkt-font-size-lg:  1.375rem;  /* 22px — Judul Pendukung (22pt) */
+  --jkt-font-size-xl:  1.5rem;    /* 24px */
+  --jkt-font-size-2xl: 2.25rem;   /* 36px — Judul Utama (36pt) */
+  --jkt-font-size-3xl: 3rem;      /* 48px */
+
+  /* --- Typography: Font Weight --- */
+  --jkt-font-weight-regular:  400;
+  --jkt-font-weight-medium:   500;
+  --jkt-font-weight-semibold: 600;
+  --jkt-font-weight-bold:     700;
+
+  /* --- Typography: Line Height --- */
+  --jkt-line-height-tight:   1.25;
+  --jkt-line-height-normal:  1.5;
+  --jkt-line-height-relaxed: 1.75;
+}

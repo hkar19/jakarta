@@ -1,0 +1,64 @@
+{
+  "name": "ds-jakarta",
+  "version": "0.1.0",
+  "description": "Jakarta Design System — design tokens for React and the web",
+  "keywords": [
+    "jakarta",
+    "design-system",
+    "design-tokens",
+    "css-variables"
+  ],
+  "homepage": "https://hkar19.github.io/jakarta",
+  "bugs": {
+    "url": "https://github.com/hkar19/jakarta/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hkar19/jakarta.git"
+  },
+  "license": "ISC",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./assets/*": "./dist/assets/*"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.2.6"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.2.1",
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/addon-mcp": "^0.6.0",
+    "@storybook/addon-vitest": "^10.4.1",
+    "@storybook/react-vite": "^10.4.1",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/browser-playwright": "^4.1.7",
+    "@vitest/coverage-v8": "^4.1.7",
+    "playwright": "^1.60.0",
+    "prop-types": "^15.8.1",
+    "storybook": "^10.4.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^4.1.7"
+  }
+}

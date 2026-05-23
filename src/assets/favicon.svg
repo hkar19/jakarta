@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 900" fill="none">
+  <!-- Kepulauan Seribu — top-left triangle, Biru Pesisir -->
+  <polygon points="0,0 100,0 0,100" fill="#00aaff"/>
+  <!-- Utara — Biru Abang -->
+  <rect x="200" y="0" width="100" height="100" fill="#1c5ddc"/>
+  <!-- Barat — Kuning Gigi Balang -->
+  <rect x="0" y="200" width="100" height="100" fill="#feb52b"/>
+  <!-- Pusat — Jingga Bis Kota -->
+  <rect x="200" y="200" width="100" height="100" fill="#fc351c"/>
+  <!-- Timur — Pink None -->
+  <rect x="400" y="200" width="100" height="100" fill="#eb30a2"/>
+  <!-- Selatan — Hijau Betawi -->
+  <rect x="200" y="400" width="100" height="100" fill="#19ae5d"/>
+  <!-- J stem -->
+  <path d="M 400,400 L 500,400 L 500,650 C 500,805 410,900 270,900 L 250,900 L 250,800 L 270,800 C 355,800 400,750 400,650 Z" fill="#1a1a1a"/>
+</svg>

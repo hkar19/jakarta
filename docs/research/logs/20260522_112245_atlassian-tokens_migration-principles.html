@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atlassian Token Migration Principles — Research Log</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4f5f7;
+      color: #172b4d;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    article.log {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    .log-header {
+      padding: 2rem 2.5rem 1.75rem;
+      border-bottom: 1px solid #ebecf0;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .25rem .6rem;
+      border-radius: 3px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .badge-status-complete { background: #e3fcef; color: #006644; }
+    .badge-status-draft    { background: #fff7d6; color: #974f0c; }
+    .badge-tag             { background: #deebff; color: #0747a6; }
+
+    .log-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #172b4d;
+      margin-bottom: .5rem;
+    }
+
+    .meta {
+      font-size: .82rem;
+      color: #6b778c;
+      margin-bottom: 1rem;
+    }
+
+    p.summary {
+      font-size: 1rem;
+      color: #344563;
+      max-width: 70ch;
+    }
+
+    article.log section {
+      padding: 1.75rem 2.5rem;
+      border-bottom: 1px solid #ebecf0;
+    }
+
+    article.log section:last-child { border-bottom: none; }
+
+    section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #172b4d;
+      margin-bottom: 1rem;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid #deebff;
+    }
+
+    p { margin-bottom: .85rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 1.4rem;
+      margin-bottom: .85rem;
+    }
+
+    li { margin-bottom: .4rem; }
+
+    code {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: .85em;
+      background: #f4f5f7;
+      border: 1px solid #dfe1e6;
+      border-radius: 3px;
+      padding: .1em .35em;
+    }
+
+    pre {
+      background: #0d1117;
+      color: #e6edf3;
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+      font-size: .85rem;
+      line-height: 1.55;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      font-size: .9rem;
+    }
+
+    th {
+      background: #f4f5f7;
+      font-weight: 600;
+      text-align: left;
+      padding: .6rem .8rem;
+      border: 1px solid #dfe1e6;
+    }
+
+    td {
+      padding: .55rem .8rem;
+      border: 1px solid #dfe1e6;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #fafbfc; }
+
+    a { color: #0052cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li::before { content: '☐ '; color: #0052cc; font-size: 1.1em; }
+
+    .token-tree {
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      font-size: .83rem;
+      background: #f4f5f7;
+      border: 1px solid #dfe1e6;
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      line-height: 1.8;
+    }
+
+    .token-tree .cat { color: #0747a6; font-weight: 700; }
+    .token-tree .sub { color: #403294; }
+    .token-tree .leaf { color: #006644; }
+    .token-tree .state { color: #974f0c; }
+  </style>
+</head>
+<body>
+<article class="log">
+  <header class="log-header">
+    <div class="meta-row">
+      <span class="badge badge-status-complete">complete</span>
+      <span class="badge badge-tag">design-tokens</span>
+      <span class="badge badge-tag">atlassian</span>
+      <span class="badge badge-tag">naming-conventions</span>
+      <span class="badge badge-tag">migration</span>
+    </div>
+    <h1>Atlassian Token Migration Principles</h1>
+    <div class="meta">
+      <span>2026-05-22 18:22:45 WIB</span> &bull;
+      <span>Hadi K AR</span>
+    </div>
+    <p class="summary">
+      Atlassian's token system uses a semantic, dot-separated naming hierarchy
+      (<code>category.subcategory.variant.state</code>) that maps to CSS custom properties with a
+      package prefix. Their three-step migration approach — set up theming, update components,
+      replace raw values via codemod — provides a practical blueprint for Jakarta's <code>--jkt-</code>
+      token strategy.
+    </p>
+  </header>
+
+  <section id="background">
+    <h2>Background</h2>
+    <p>
+      Jakarta Design System (<code>ds-jakarta</code>) is being built from the ground up as a design
+      token library. Before defining token naming conventions, categories, or CSS variable structure,
+      it is worth studying the Atlassian Design System's token migration documentation as a primary
+      reference — since the Jakarta CLAUDE.md explicitly cites it as the modelling basis.
+    </p>
+    <p>
+      This research surfaces the principles behind Atlassian's token naming, hierarchy, and migration
+      tooling so that Jakarta can adopt the parts that are useful and consciously diverge where
+      appropriate.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <ul>
+      <li>What design tokens are, per Atlassian's definition</li>
+      <li>The migration approach for developers and designers</li>
+      <li>Token naming conventions and the full category taxonomy (from <code>@atlaskit/tokens@13.0.4</code>)</li>
+      <li>How token names map to CSS custom properties</li>
+      <li>Implications for Jakarta's <code>--jkt-</code> token system</li>
+    </ul>
+    <p>
+      Not covered: Atlassian's Figma plugin tooling, theming runtime internals, or component-level
+      token usage within Atlaskit components.
+    </p>
+  </section>
+
+  <section id="findings">
+    <h2>Findings</h2>
+
+    <h3 style="margin: 1.2rem 0 .6rem; font-size: .95rem; color: #344563;">1. Definition</h3>
+    <p>
+      Atlassian defines design tokens as <em>"the single source of truth to name and store design
+      decisions."</em> They replace raw CSS values (e.g. <code>#FF0000</code>, <code>16px</code>) with
+      semantically named references that survive theme changes — enabling dark mode, high contrast, and
+      future brand updates without touching component code.
+    </p>
+
+    <h3 style="margin: 1.2rem 0 .6rem; font-size: .95rem; color: #344563;">2. Naming Convention</h3>
+    <p>
+      Tokens use <strong>dot-separated lowercase segments</strong> in code, converted to
+      <strong>hyphen-separated CSS custom properties</strong> with the package prefix at output time.
+    </p>
+    <div class="token-tree">
+      <span class="cat">category</span>.<span class="sub">subcategory</span>.<span class="leaf">variant</span>.<span class="state">state</span><br><br>
+      <span class="cat">color</span>.<span class="sub">background</span>.<span class="leaf">danger</span>          → <code>--ds-background-danger</code><br>
+      <span class="cat">color</span>.<span class="sub">background</span>.<span class="leaf">danger</span>.<span class="state">hovered</span>  → <code>--ds-background-danger-hovered</code><br>
+      <span class="cat">color</span>.<span class="sub">text</span>.<span class="leaf">accent</span>.<span class="state">lime</span>       → <code>--ds-text-accent-lime</code><br>
+      <span class="cat">space</span>.<span class="leaf">200</span>                              → <code>--ds-space-200</code><br>
+      <span class="cat">border</span>.<span class="sub">radius</span>.<span class="leaf">100</span>                  → <code>--ds-border-radius-100</code>
+    </div>
+    <p>
+      The <code>category</code> segment is always the design property domain. State (hovered, pressed,
+      selected, disabled) is always the <em>last</em> segment and optional — not every token has a
+      state variant. Palette/raw values are never exported as public tokens; only semantic tokens
+      are part of the API.
+    </p>
+
+    <h3 style="margin: 1.2rem 0 .6rem; font-size: .95rem; color: #344563;">3. Token Categories (Full Taxonomy)</h3>
+    <p>From <code>@atlaskit/tokens@13.0.4</code> API surface:</p>
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Subcategories / Variants</th><th>State Variants</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>color.text</code></td>
+          <td>accent (lime/red/orange/yellow/green/teal/blue/purple/magenta/gray), brand, danger, disabled, information, inverse, selected, subtle, subtlest, success, warning, discovery</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>color.icon</code></td>
+          <td>Same accent + semantic set as <code>color.text</code></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>color.border</code></td>
+          <td>bold, brand, danger, disabled, discovery, focused, information, input, inverse, selected, success, warning</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>color.background</code></td>
+          <td>accent colors (subtlest → bolder), brand, danger, disabled, discovery, information, input, inverse, neutral, selected, success, warning</td>
+          <td>hovered, pressed</td>
+        </tr>
+        <tr>
+          <td><code>color.blanket</code></td>
+          <td>default, selected, danger</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>color.interaction</code></td>
+          <td>—</td>
+          <td>hovered, pressed</td>
+        </tr>
+        <tr>
+          <td><code>color.link</code></td>
+          <td>—</td>
+          <td>default, pressed, visited</td>
+        </tr>
+        <tr>
+          <td><code>color.skeleton</code></td>
+          <td>default, subtle</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>color.chart</code></td>
+          <td>categorical (1–8), semantic families with intensity (bold, bolder, boldest)</td>
+          <td>hovered</td>
+        </tr>
+        <tr>
+          <td><code>elevation.surface</code></td>
+          <td>overlay, raised, sunken</td>
+          <td>hovered, pressed</td>
+        </tr>
+        <tr>
+          <td><code>elevation.shadow</code></td>
+          <td>overflow, overlay, raised</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>space</code></td>
+          <td>0, 025, 050, 075, 100, 150, 200, 250, 300, 400, 500, 600, 800, 1000 (positive + negative)</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>font</code></td>
+          <td>family, size, weight, lineHeight, letterSpacing; body, heading, code variants</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>border.radius</code></td>
+          <td>050, 100, 200, 300, 400, circle</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>border.width</code></td>
+          <td>default, indicator, outline</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>opacity</code></td>
+          <td>disabled, loading</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>utility</code></td>
+          <td>UNSAFE.transparent, UNSAFE.textTransformUppercase, elevation.surface.current</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin: 1.2rem 0 .6rem; font-size: .95rem; color: #344563;">4. Token Function API</h3>
+    <p>
+      In TypeScript/JS, tokens are consumed via the <code>token()</code> function — not by hardcoding
+      CSS variable names. This provides type checking, linting, and build-time transformation.
+    </p>
+    <pre><code>import { token } from '@atlaskit/tokens';
+
+// Returns CSS var reference at runtime, resolved at build time via Babel plugin
+color: token('color.background.neutral');
+// → var(--ds-background-neutral)
+
+// Fallback arg (deprecated — avoid in new code)
+background: token('color.background.danger', '#ffebeb');</code></pre>
+    <p>
+      The fallback argument is now discouraged — tokens are expected to always resolve via the theme.
+    </p>
+
+    <h3 style="margin: 1.2rem 0 .6rem; font-size: .95rem; color: #344563;">5. Migration Approach (3 Steps)</h3>
+    <ol>
+      <li><strong>Set up theming</strong> — install the theme provider, apply it at the app root</li>
+      <li><strong>Update design system components</strong> — bring DS dependencies to the latest token-aware versions</li>
+      <li><strong>Replace raw values</strong> — run codemod CLI to auto-suggest token replacements, then review manually</li>
+    </ol>
+    <p>
+      Teams test the migration (especially dark mode) behind a Chrome extension toggle before public
+      release. The codemod handles common patterns; edge cases require manual token selection.
+    </p>
+  </section>
+
+  <section id="options">
+    <h2>Options Considered</h2>
+    <p>
+      Not applicable — this was a research session on a specific reference system, not a comparison of alternatives.
+    </p>
+  </section>
+
+  <section id="recommendation">
+    <h2>Recommendation</h2>
+    <p>
+      Jakarta should adopt the Atlassian naming hierarchy (<code>category.subcategory.variant.state</code>)
+      as the internal token model, replacing the <code>ds-</code> prefix with <code>jkt-</code> for
+      CSS custom property output. Concretely:
+    </p>
+    <ul>
+      <li>
+        Define tokens internally using dot-notation keys (even if TypeScript, not a token function):
+        <code>color.background.brand</code>, <code>space.200</code>, <code>border.radius.100</code>
+      </li>
+      <li>
+        Emit CSS as <code>--jkt-background-brand</code>, <code>--jkt-space-200</code>,
+        <code>--jkt-border-radius-100</code> — strip the top-level category prefix for color tokens
+        (matching Atlassian's pattern where <code>color.*</code> becomes <code>--ds-*</code> without
+        the "color" segment)
+      </li>
+      <li>
+        Keep state variants (<code>hovered</code>, <code>pressed</code>, <code>disabled</code>) as the
+        rightmost segment — never embed state in the middle of a name
+      </li>
+      <li>
+        Never expose raw palette values as public tokens — only semantic names
+      </li>
+      <li>
+        Expand token categories deliberately in this order: color → spacing → typography → border →
+        elevation — matching Jakarta's planned roadmap
+      </li>
+    </ul>
+  </section>
+
+  <section id="next-steps">
+    <h2>Next Steps</h2>
+    <ul class="checklist">
+      <li>Audit current <code>src/tokens/</code> files against the naming hierarchy discovered here</li>
+      <li>Define Jakarta's variant vocabulary for color (accent names, intensity scale, state set)</li>
+      <li>Decide whether to expose a <code>token()</code>-style JS function or rely on CSS vars only</li>
+      <li>Document the chosen prefix-stripping rule (<code>color.*</code> → <code>--jkt-*</code>) in CLAUDE.md</li>
+      <li>Cross-reference findings against <code>docs/JakartaBrandBook.pdf</code> before assigning actual values</li>
+    </ul>
+  </section>
+
+  <section id="references">
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://atlassian.design/foundations/tokens/migrate-to-tokens">Atlassian Design — Migrate to tokens</a></li>
+      <li><a href="https://atlassian.design/foundations/tokens">Atlassian Design — Design Tokens overview</a></li>
+      <li><a href="https://atlassian.design/foundations/tokens/use-tokens-in-code">Atlassian Design — Use tokens in code</a></li>
+      <li><a href="https://unpkg.com/@atlaskit/tokens@13.0.4/report.api.md"><code>@atlaskit/tokens@13.0.4</code> API surface (unpkg)</a></li>
+      <li>Internal: <a href="../../src/tokens/">src/tokens/</a> — Jakarta token definitions</li>
+      <li>Internal: <a href="../JakartaBrandBook.pdf">docs/JakartaBrandBook.pdf</a> — Brand guidelines</li>
+    </ul>
+  </section>
+</article>
+</body>
+</html>

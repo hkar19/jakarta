@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jakarta Brand Book — Design System Findings — Research Log</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4f5f7;
+      color: #172b4d;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    article.log {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    .log-header {
+      padding: 2rem 2.5rem 1.75rem;
+      border-bottom: 1px solid #ebecf0;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .25rem .6rem;
+      border-radius: 3px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .badge-status-complete { background: #e3fcef; color: #006644; }
+    .badge-status-draft    { background: #fff7d6; color: #974f0c; }
+    .badge-tag             { background: #deebff; color: #0747a6; }
+
+    .log-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #172b4d;
+      margin-bottom: .5rem;
+    }
+
+    .meta {
+      font-size: .82rem;
+      color: #6b778c;
+      margin-bottom: 1rem;
+    }
+
+    p.summary {
+      font-size: 1rem;
+      color: #344563;
+      max-width: 70ch;
+    }
+
+    article.log section {
+      padding: 1.75rem 2.5rem;
+      border-bottom: 1px solid #ebecf0;
+    }
+
+    article.log section:last-child { border-bottom: none; }
+
+    section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #172b4d;
+      margin-bottom: 1rem;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid #deebff;
+    }
+
+    section h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: #344563;
+      margin: 1.2rem 0 .6rem;
+    }
+
+    p { margin-bottom: .85rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 1.4rem;
+      margin-bottom: .85rem;
+    }
+
+    li { margin-bottom: .4rem; }
+
+    code {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: .85em;
+      background: #f4f5f7;
+      border: 1px solid #dfe1e6;
+      border-radius: 3px;
+      padding: .1em .35em;
+    }
+
+    pre {
+      background: #0d1117;
+      color: #e6edf3;
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+      font-size: .85rem;
+      line-height: 1.55;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      font-size: .9rem;
+    }
+
+    th {
+      background: #f4f5f7;
+      font-weight: 600;
+      text-align: left;
+      padding: .6rem .8rem;
+      border: 1px solid #dfe1e6;
+    }
+
+    td {
+      padding: .55rem .8rem;
+      border: 1px solid #dfe1e6;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #fafbfc; }
+
+    a { color: #0052cc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li::before { content: '☐ '; color: #0052cc; font-size: 1.1em; }
+
+    .color-swatch {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.15);
+      vertical-align: middle;
+      margin-right: .35rem;
+    }
+  </style>
+</head>
+<body>
+<article class="log">
+  <header class="log-header">
+    <div class="meta-row">
+      <span class="badge badge-status-complete">complete</span>
+      <span class="badge badge-tag">brand</span>
+      <span class="badge badge-tag">color</span>
+      <span class="badge badge-tag">typography</span>
+      <span class="badge badge-tag">tokens</span>
+      <span class="badge badge-tag">logo</span>
+    </div>
+    <h1>Jakarta Brand Book — Design System Findings</h1>
+    <div class="meta">
+      <span>2026-05-22 11:22:45 WIB</span> &bull;
+      <span>Hadi K AR</span>
+    </div>
+    <p class="summary">
+      Full extraction of the Jakarta Brand Book (104 pp, image-heavy) covering the
+      +Jakarta logo anatomy, the MENOR 6-color system with district mappings, Plus Jakarta Sans
+      typography scale, graphic pattern primitives, and icon set — all mapped to actionable
+      <code>ds-jakarta</code> token and component recommendations.
+    </p>
+  </header>
+
+  <section id="background">
+    <h2>Background</h2>
+    <p>
+      The <code>ds-jakarta</code> design token library needs to be grounded in the official
+      Jakarta brand identity. The Brand Book (<code>docs/JakartaBrandBook.pdf</code>, 104 pages,
+      created 2020, revised 2024) is the authoritative source for logo usage, the MENOR color
+      family, typography, graphic elements, iconography, and tone of voice. This research reads
+      the full document to extract everything reusable in a token library or component catalogue.
+    </p>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <ul>
+      <li>Logo anatomy and usage rules (reusable as SVG components)</li>
+      <li>Color system: names, HEX values, Pantone references, district assignments, combination rules</li>
+      <li>Typography: typeface family, weight variants, type scale with sizes</li>
+      <li>Graphic element primitives (squares, triangles, J-curve) and pattern system</li>
+      <li>Iconography style and categories</li>
+      <li>Tone of voice principles</li>
+      <li>Derived design system token and component recommendations</li>
+    </ul>
+    <p><em>Out of scope:</em> photography guidelines, application mockups, print production specs.</p>
+  </section>
+
+  <section id="findings">
+    <h2>Findings</h2>
+
+    <h3>1. Logo Anatomy</h3>
+    <p>
+      The <code>+Jakarta</code> identity has two distinct marks, both derived from a 3×3 dot-grid:
+    </p>
+    <ul>
+      <li>
+        <strong>+J Icon</strong> — a compact symbol made of squares and triangles arranged in a
+        3×3 grid, forming a plus sign with a J-curve emerging from the lower-right quadrant.
+        Used standalone at small sizes, on vehicles, and as a favicon/app-icon candidate.
+      </li>
+      <li>
+        <strong>Full wordmark</strong> — the +J Icon paired with "Jakarta" set in
+        Plus Jakarta Sans Display, with a custom lowercase <code>j</code> featuring a rounded
+        descending tail that echoes the J-curve in the icon.
+      </li>
+    </ul>
+    <p><strong>Logo usage rules:</strong></p>
+    <ul>
+      <li>Exclusion zone: 1× icon height clear space on all four sides</li>
+      <li>Approved colour combinations: white-on-brand-colour, black-on-white, single-colour monochrome</li>
+      <li>Minimum size enforced (exact pt values are in the PDF; digitally, 24 px icon height is a reasonable floor)</li>
+      <li>No distortion, rotation, recolouring outside approved palette, or drop shadows</li>
+    </ul>
+
+    <h3>2. Color System — MENOR Family</h3>
+    <p>
+      MENOR is the mnemonic for the six vivid brand colours (Merah, Kuning, Orange/Jingga, Biru,
+      Pink, Biru Pesisir — loosely). Each colour maps to a Jakarta administrative district and
+      carries a semantic meaning:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Token name (proposed)</th>
+          <th>Indonesian name</th>
+          <th>Swatch</th>
+          <th>HEX</th>
+          <th>Pantone</th>
+          <th>District</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>color.brand.hijau-betawi</code></td>
+          <td>Hijau Betawi</td>
+          <td><span class="color-swatch" style="background:#19ae5d"></span></td>
+          <td><code>#19ae5d</code></td>
+          <td>7481 C</td>
+          <td>Jakarta Selatan</td>
+          <td>Harmony, Betawi culture</td>
+        </tr>
+        <tr>
+          <td><code>color.brand.kuning-gigi-balang</code></td>
+          <td>Kuning Gigi Balang</td>
+          <td><span class="color-swatch" style="background:#feb52b"></span></td>
+          <td><code>#feb52b</code></td>
+          <td>1235 C</td>
+          <td>Jakarta Barat</td>
+          <td>Warmth, cleverness</td>
+        </tr>
+        <tr>
+          <td><code>color.brand.jingga-bis-kota</code></td>
+          <td>Jingga Bis Kota</td>
+          <td><span class="color-swatch" style="background:#fc351c"></span></td>
+          <td><code>#fc351c</code></td>
+          <td>Warm Red C</td>
+          <td>Jakarta Pusat</td>
+          <td>Perseverance, energy</td>
+        </tr>
+        <tr>
+          <td><code>color.brand.biru-abang</code></td>
+          <td>Biru Abang</td>
+          <td><span class="color-swatch" style="background:#1c5ddc"></span></td>
+          <td><code>#1c5ddc</code></td>
+          <td>2728 C</td>
+          <td>Jakarta Utara</td>
+          <td>Movement, connection</td>
+        </tr>
+        <tr>
+          <td><code>color.brand.pink-none</code></td>
+          <td>Pink None</td>
+          <td><span class="color-swatch" style="background:#eb30a2"></span></td>
+          <td><code>#eb30a2</code></td>
+          <td>Rhodamine Red C</td>
+          <td>Jakarta Timur</td>
+          <td>Spirit, vibrancy</td>
+        </tr>
+        <tr>
+          <td><code>color.brand.biru-pesisir</code></td>
+          <td>Biru Pesisir</td>
+          <td><span class="color-swatch" style="background:#00aaff"></span></td>
+          <td><code>#00aaff</code></td>
+          <td>2995 C</td>
+          <td>Kepulauan Seribu</td>
+          <td>Coastal calm, the islands</td>
+        </tr>
+        <tr>
+          <td><code>color.neutral.black</code></td>
+          <td>Hitam</td>
+          <td><span class="color-swatch" style="background:#000000"></span></td>
+          <td><code>#000000</code></td>
+          <td>Black 6C</td>
+          <td>—</td>
+          <td>Primary logo colour</td>
+        </tr>
+        <tr>
+          <td><code>color.neutral.white</code></td>
+          <td>Putih</td>
+          <td><span class="color-swatch" style="background:#ffffff; border-color:#ccc"></span></td>
+          <td><code>#ffffff</code></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Primary logo colour</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Colour combination rules:</strong></p>
+    <ul>
+      <li>Maximum 3 colours per medium</li>
+      <li>Six pre-approved combinations (each = 2 brand colours + white or black):
+        <ul>
+          <li>Biru Abang + Pink None + White</li>
+          <li>Hijau Betawi + Kuning Gigi Balang + White</li>
+          <li>Biru Pesisir + Jingga Bis Kota + White</li>
+          <li>Kuning Gigi Balang + Jingga Bis Kota + Black</li>
+          <li>Hijau Betawi + Biru Abang + White</li>
+          <li>Pink None + Biru Pesisir + White</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>3. Typography</h3>
+    <p>
+      The brand typeface is <strong>Plus Jakarta Sans</strong>, available in two optical sizes:
+      <em>Display</em> (for headlines) and <em>Text</em> (for body copy). The font is open-source
+      and available on Google Fonts, making it trivially embeddable.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Role (Indonesian)</th>
+          <th>Proposed token</th>
+          <th>Family</th>
+          <th>Size</th>
+          <th>Weight / Style</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Judul Utama (Primary Heading)</td>
+          <td><code>typography.scale.heading-1</code></td>
+          <td>Plus Jakarta Sans Display</td>
+          <td>36 pt</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td>Judul Pendukung (Secondary Heading)</td>
+          <td><code>typography.scale.heading-2</code></td>
+          <td>Plus Jakarta Sans Text</td>
+          <td>22 pt</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td>Tajuk (Label / Subheading)</td>
+          <td><code>typography.scale.label</code></td>
+          <td>Plus Jakarta Sans Text</td>
+          <td>12 pt</td>
+          <td>Bold</td>
+        </tr>
+        <tr>
+          <td>Paragraf (Body)</td>
+          <td><code>typography.scale.body</code></td>
+          <td>Plus Jakarta Sans Text</td>
+          <td>9 pt</td>
+          <td>Regular</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Additional supported weights: Light, Italic. Body italic is available for emphasis.</p>
+
+    <h3>4. Graphic Primitives &amp; Pattern System</h3>
+    <p>
+      All brand graphics derive from three primitives built on the same dot-grid as the logo:
+    </p>
+    <ul>
+      <li><strong>Persegi (square)</strong> — solid or outlined; the most neutral element</li>
+      <li><strong>Segitiga (triangle)</strong> — dynamic, directional; signals movement</li>
+      <li><strong>J-curve</strong> — the brand's unique organic element; signals warmth and collaboration</li>
+    </ul>
+    <p>These combine into two pattern families:</p>
+    <ul>
+      <li>
+        <strong>Pola Umum (General Patterns)</strong> — three complexity tiers (Simple, Medium, Complex),
+        all using a "fireworks burst" motif with mixed primitives. Colour-agnostic; any MENOR pair applies.
+      </li>
+      <li>
+        <strong>Pola Tematik (Thematic Patterns)</strong> — four themes, each with a designated colour pair:
+        <ol>
+          <li><em>Konektivitas &amp; Kolaborasi</em> — J-curves interlocking; Hijau Betawi + Biru Abang</li>
+          <li><em>Produktivitas &amp; Kemajuan</em> — triangles in dynamic arrangement; Biru Pesisir + Jingga Bis Kota</li>
+          <li><em>Sehat &amp; Bahagia</em> — fireworks/squares; Pink None + Kuning Gigi Balang</li>
+          <li><em>Rumah &amp; Tradisi</em> — ondel-ondel-inspired shapes; Hijau Betawi + Kuning Gigi Balang</li>
+        </ol>
+      </li>
+    </ul>
+
+    <h3>5. Iconography</h3>
+    <ul>
+      <li>Style: pixel-art, sharp square corners (no rounded ends), filled silhouette</li>
+      <li>The <code>+</code> symbol is embeddable into any icon at the origin point</li>
+      <li>~20 icons shown across 4 categories: Pariwisata (tourism), Transportasi (transport), Umum (general), Ruang Kolaborasi (collaboration spaces)</li>
+      <li>Grid-aligned, making them straightforward to vectorise at consistent optical sizes</li>
+    </ul>
+  </section>
+
+  <section id="options">
+    <h2>Options Considered</h2>
+    <table>
+      <thead>
+        <tr><th>Approach</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Kebab-case Indonesian names for token slugs<br>(<code>hijau-betawi</code>, <code>biru-abang</code>)</td>
+          <td>Faithful to brand; memorable; no ambiguity with generic names like "green" or "blue"</td>
+          <td>Non-English; devs unfamiliar with Jakarta brand may find it opaque</td>
+          <td><strong>Adopt</strong> — brand authenticity outweighs discoverability cost; names are documented here</td>
+        </tr>
+        <tr>
+          <td>Map to generic semantic names (<code>color.brand.green</code>)</td>
+          <td>Familiar to international contributors</td>
+          <td>Loses cultural specificity; "green" can't distinguish Hijau Betawi from future additions</td>
+          <td><strong>Reject</strong></td>
+        </tr>
+        <tr>
+          <td>District-keyed tokens (<code>color.district.selatan</code>)</td>
+          <td>Maps perfectly to city geography use cases</td>
+          <td>Not useful for non-map UI; district as primary key makes brand meaning secondary</td>
+          <td><strong>Alias only</strong> — add district aliases on top of brand-name primaries</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="recommendation">
+    <h2>Recommendation</h2>
+
+    <h3>Color tokens</h3>
+    <p>
+      Define 8 primitive color tokens in <code>src/tokens/color.ts</code> using Indonesian brand names
+      as the slug. Add district aliases as a second tier. Example:
+    </p>
+    <pre><code>// src/tokens/color.ts
+export const color = {
+  brand: {
+    hijauBetawi:       '#19ae5d',  // Jakarta Selatan
+    kuningGigiBalang:  '#feb52b',  // Jakarta Barat
+    jinggaBisKota:     '#fc351c',  // Jakarta Pusat
+    biruAbang:         '#1c5ddc',  // Jakarta Utara
+    pinkNone:          '#eb30a2',  // Jakarta Timur
+    biruPesisir:       '#00aaff',  // Kepulauan Seribu
+  },
+  neutral: {
+    black: '#000000',
+    white: '#ffffff',
+  },
+  district: {
+    selatan:    '#19ae5d',
+    barat:      '#feb52b',
+    pusat:      '#fc351c',
+    utara:      '#1c5ddc',
+    timur:      '#eb30a2',
+    kepulauan:  '#00aaff',
+  },
+} as const;</code></pre>
+    <p>
+      CSS custom properties follow the Atlassian naming convention (see companion research log):
+      <code>--jkt-color-brand-hijau-betawi</code>, etc.
+    </p>
+
+    <h3>Typography tokens</h3>
+    <p>
+      Register Plus Jakarta Sans via <code>@fontsource/plus-jakarta-sans</code> (open-source, npm available).
+      Token scale maps directly to the Brand Book hierarchy:
+    </p>
+    <pre><code>// src/tokens/typography.ts
+export const typography = {
+  fontFamily: {
+    display: '"Plus Jakarta Sans Display", sans-serif',
+    text:    '"Plus Jakarta Sans", sans-serif',
+  },
+  fontSize: {
+    heading1: '36px',   // Judul Utama
+    heading2: '22px',   // Judul Pendukung
+    label:    '12px',   // Tajuk
+    body:     '9px',    // Paragraf (≈ 12px at standard screen density)
+  },
+  fontWeight: {
+    regular: '400',
+    medium:  '500',
+    bold:    '700',
+  },
+} as const;</code></pre>
+    <p>
+      <em>Note on body size:</em> 9 pt is a print unit. At 96 dpi screen resolution this is ≈ 12 px.
+      Verify against the final Storybook render before committing the pixel value.
+    </p>
+
+    <h3>Logo &amp; graphic elements</h3>
+    <ul>
+      <li>Export the +J icon and full wordmark as SVG components in <code>src/components/Logo/</code></li>
+      <li>Accept a <code>variant</code> prop: <code>"icon" | "wordmark"</code></li>
+      <li>Accept a <code>color</code> prop: <code>"white" | "black" | "brand"</code> (maps to the three approved combinations)</li>
+      <li>The three graphic primitives (square, triangle, J-curve) can be exported as base SVG components for pattern composition</li>
+    </ul>
+
+    <h3>Iconography</h3>
+    <p>
+      Source the ~20 brand icons as SVG files in <code>src/icons/</code>, grouped by category.
+      Publish as a separate entry point (<code>ds-jakarta/icons</code>) to keep tree-shaking clean.
+    </p>
+  </section>
+
+  <section id="next-steps">
+    <h2>Next Steps</h2>
+    <ul class="checklist">
+      <li>Create <code>src/tokens/color.ts</code> with all 8 brand + district alias tokens</li>
+      <li>Update <code>src/tokens.css</code> with <code>--jkt-color-*</code> custom properties for all brand colours</li>
+      <li>Add Plus Jakarta Sans font dependency (<code>@fontsource/plus-jakarta-sans</code>) and create <code>src/tokens/typography.ts</code></li>
+      <li>Trace and export the +J icon and full wordmark as SVG components under <code>src/components/Logo/</code></li>
+      <li>Trace the three graphic primitives (square, triangle, J-curve) as base SVG components</li>
+      <li>Source or trace the ~20 brand icons into <code>src/icons/</code></li>
+      <li>Write Storybook stories for the color palette, typography scale, and logo variants</li>
+      <li>Verify pt→px conversion for body text (9 pt) at target screen density</li>
+    </ul>
+  </section>
+
+  <section id="references">
+    <h2>References</h2>
+    <ul>
+      <li>Internal: <code>docs/JakartaBrandBook.pdf</code> — primary source (104 pp)</li>
+      <li>Internal: <code>docs/research/logs/20260522_112245_atlassian-tokens_migration-principles.html</code> — Atlassian token naming conventions applied to <code>--jkt-*</code></li>
+      <li><a href="https://fonts.google.com/specimen/Plus+Jakarta+Sans">Plus Jakarta Sans — Google Fonts</a></li>
+      <li><a href="https://www.npmjs.com/package/@fontsource/plus-jakarta-sans">@fontsource/plus-jakarta-sans — npm</a></li>
+    </ul>
+  </section>
+</article>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Log — Jakarta Design System</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4f5f7;
+      color: #172b4d;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    header.page-header {
+      max-width: 960px;
+      margin: 0 auto 2rem;
+    }
+
+    header.page-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #172b4d;
+      margin-bottom: .25rem;
+    }
+
+    header.page-header p {
+      color: #6b778c;
+      font-size: .9rem;
+    }
+
+    .grid {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      transition: box-shadow 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .2rem .5rem;
+      border-radius: 3px;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .badge-status-complete { background: #e3fcef; color: #006644; }
+    .badge-status-draft    { background: #fff7d6; color: #974f0c; }
+    .badge-tag             { background: #deebff; color: #0747a6; }
+
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #172b4d;
+      line-height: 1.35;
+    }
+
+    .card p {
+      font-size: .875rem;
+      color: #344563;
+      flex: 1;
+    }
+
+    .card-date {
+      font-size: .75rem;
+      color: #6b778c;
+    }
+  </style>
+</head>
+<body>
+<header class="page-header">
+  <h1>Research Log</h1>
+  <p>Jakarta Design System (<code>ds-jakarta</code>) — all research entries, newest first.</p>
+</header>
+
+<div class="grid">
+
+  <a class="card" href="20260522_112245_brand-book_design-system-findings.html">
+    <div class="card-meta">
+      <span class="badge badge-status-complete">complete</span>
+      <span class="badge badge-tag">brand</span>
+      <span class="badge badge-tag">color</span>
+      <span class="badge badge-tag">typography</span>
+      <span class="badge badge-tag">tokens</span>
+      <span class="badge badge-tag">logo</span>
+    </div>
+    <h2>Jakarta Brand Book — Design System Findings</h2>
+    <p>
+      Full extraction of the 104-page Brand Book: +Jakarta logo anatomy, the MENOR 6-colour
+      system with district mappings, Plus Jakarta Sans type scale, graphic primitives, pattern
+      system, and icon set — mapped to <code>ds-jakarta</code> token and component recommendations.
+    </p>
+    <span class="card-date">2026-05-22 &bull; Hadi K AR</span>
+  </a>
+
+  <a class="card" href="20260522_112245_atlassian-tokens_migration-principles.html">
+    <div class="card-meta">
+      <span class="badge badge-status-complete">complete</span>
+      <span class="badge badge-tag">design-tokens</span>
+      <span class="badge badge-tag">atlassian</span>
+      <span class="badge badge-tag">naming</span>
+      <span class="badge badge-tag">migration</span>
+    </div>
+    <h2>Atlassian Token Migration Principles</h2>
+    <p>
+      Deep-dive into Atlassian's token migration guide: what design tokens are, the
+      dot-separated naming hierarchy, the three-step migration process, and how these
+      principles apply to building the <code>--jkt-*</code> token system for Jakarta.
+    </p>
+    <span class="card-date">2026-05-22 &bull; Hadi K AR</span>
+  </a>
+
+</div>
+</body>
+</html>
